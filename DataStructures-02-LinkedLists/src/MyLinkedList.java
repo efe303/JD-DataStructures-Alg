@@ -35,6 +35,30 @@ public class MyLinkedList {
             size++;
         }
 
+    public void insert(int item) {
+        var node = new Node(item);
+        Node current;
+        if (isEmpty())
+            first = last = node;
+        else if (item<=first.value){
+            node.next=first;
+            first=node;
+        }
+        else {
+            current=first;
+            while((current.next!=null)&&(node.value>current.next.value)) current=current.next;
+            if (current.next==null) {// insertion after last
+                current.next=node;
+                last=node;
+            } else {
+                node.next=current.next;
+                current.next=node;
+            }
+        }
+        size++;
+    }
+
+
         public void deleteLast(){
             if (isEmpty()) throw new NoSuchElementException();
             System.out.println("Deleting last :"+ last.value);
